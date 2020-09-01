@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { fetchAdmins } from '../actions/index';
+import requireAuth from "../components/hocs/requireAuth";
 
 const AdminsList = ({ fetchAdmins, admins }) => {
   useEffect(() => {
@@ -29,5 +30,5 @@ const loadData = (store) => (store.dispatch(fetchAdmins()));
 
 export default {
   loadData,
-  component: connect(mapStateToProps, { fetchAdmins })(AdminsList)
+  component: connect(mapStateToProps, { fetchAdmins })(requireAuth(AdminsList))
 }

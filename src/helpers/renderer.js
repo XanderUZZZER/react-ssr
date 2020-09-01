@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import { renderRoutes } from 'react-router-config';
 import serialize from 'serialize-javascript'
 import Routes from '../client/Routes';
+import { Helmet } from 'react-helmet';
 
 export default (req, store, context) => {
   const content = renderToString(
@@ -15,9 +16,15 @@ export default (req, store, context) => {
     </Provider>
   );
 
+  const helmet = Helmet.renderStatic();
+  const title = helmet.title.toString();
+  const meta = helmet.meta.toString();
+
   return `
     <html>
       <head>
+        ${title}
+        ${meta}
        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       </head>
